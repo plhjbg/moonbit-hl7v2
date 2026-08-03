@@ -1,0 +1,16 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "plhjbg/moonbit-hl7v2/lib/generator"
+
+// Values
+pub fn generate_adt_a01(String, String, String, String) -> String
+
+pub fn generate_oru_r01(String, String, String, String, String, String) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

@@ -1,3 +1,4 @@
+///|
 test "convert hl7 message to json, xml, fhir, and markdown" {
   let hl7_raw = "MSH|^~\\&|LIS|HOSPITAL|HIS|CENTER|20260803120000||ORU^R01|MSG00001|P|2.3\rPID|1||10001^^^HOSPITAL||DOE^JOHN||19800101|M\rOBX|1|NM|GLU^Glucose||95|mg/dL|70-99|N|||F"
   let parsed = @parser.parse_message(hl7_raw)

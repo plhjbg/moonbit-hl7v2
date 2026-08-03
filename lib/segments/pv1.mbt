@@ -15,9 +15,16 @@ pub(all) struct PV1Segment {
 
 ///|
 /// Extracts PV1Segment model from AST Segment.
-pub fn PV1Segment::from_segment(seg : @types.Segment) -> Result[PV1Segment, @types.HL7Error] {
+pub fn PV1Segment::from_segment(
+  seg : @types.Segment,
+) -> Result[PV1Segment, @types.HL7Error] {
   if seg.name != "PV1" {
-    return Err(@types.HL7Error::InvalidSegment("Expected PV1 segment, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment(
+        "Expected PV1 segment, found: " + seg.name,
+        1,
+      ),
+    )
   }
   let set_id = get_field_comp(seg, 1, 1)
   let patient_class = get_field_comp(seg, 2, 1)

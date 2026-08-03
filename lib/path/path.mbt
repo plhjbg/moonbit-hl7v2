@@ -46,7 +46,11 @@ fn parse_int(s : String) -> Int {
 pub fn parse_path(path_str : String) -> Result[HL7Path, @types.HL7Error] {
   let dash_idx = find_char(path_str, '-')
   if dash_idx == -1 {
-    return Err(@types.HL7Error::PathSyntaxError("Missing '-' segment/field separator in " + path_str))
+    return Err(
+      @types.HL7Error::PathSyntaxError(
+        "Missing '-' segment/field separator in " + path_str,
+      ),
+    )
   }
   let seg_part = path_str[0:dash_idx].to_owned()
   let rest_part = path_str[dash_idx + 1:].to_owned()
@@ -112,7 +116,10 @@ pub fn parse_path(path_str : String) -> Result[HL7Path, @types.HL7Error] {
 
 ///|
 /// Finds all segments matching segment_name in message.
-pub fn find_segments(msg : @types.Message, seg_name : String) -> Array[@types.Segment] {
+pub fn find_segments(
+  msg : @types.Message,
+  seg_name : String,
+) -> Array[@types.Segment] {
   let res = Array::new()
   for seg in msg.segments {
     if seg.name == seg_name {
@@ -133,12 +140,20 @@ pub fn get_value(msg : @types.Message, path_str : String) -> String {
   if matching_segs.length() == 0 {
     return ""
   }
-  let seg_target_idx = if path.segment_index >= 0 { path.segment_index } else { 0 }
+  let seg_target_idx = if path.segment_index >= 0 {
+    path.segment_index
+  } else {
+    0
+  }
   if seg_target_idx >= matching_segs.length() {
     return ""
   }
   let seg = matching_segs[seg_target_idx]
-  let target_field_array_idx = if path.field_index > 0 { path.field_index - 1 } else { 0 }
+  let target_field_array_idx = if path.field_index > 0 {
+    path.field_index - 1
+  } else {
+    0
+  }
   if target_field_array_idx >= seg.fields.length() {
     return ""
   }
@@ -179,7 +194,7 @@ pub fn get_value(msg : @types.Message, path_str : String) -> String {
   let comp = item.components[comp_idx_0]
   match comp {
     SimpleComp(s) => if path.subcomponent_index <= 0 { s } else { "" }
-    SubComponents(subs) => {
+    SubComponents(subs) =>
       if path.subcomponent_index <= 0 {
         let buf = StringBuilder::new()
         let mut first = true
@@ -199,7 +214,6 @@ pub fn get_value(msg : @types.Message, path_str : String) -> String {
           ""
         }
       }
-    }
   }
 }
 
@@ -216,7 +230,11 @@ pub fn get_values(msg : @types.Message, path_str : String) -> Array[String] {
   while s_idx < matching_segs.length() {
     if path.segment_index < 0 || path.segment_index == s_idx {
       let seg = matching_segs[s_idx]
-      let target_field_array_idx = if path.field_index > 0 { path.field_index - 1 } else { 0 }
+      let target_field_array_idx = if path.field_index > 0 {
+        path.field_index - 1
+      } else {
+        0
+      }
       if target_field_array_idx < seg.fields.length() {
         let field = seg.fields[target_field_array_idx]
         let mut r_idx = 0

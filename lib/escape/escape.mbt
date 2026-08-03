@@ -18,7 +18,7 @@ fn hex_val(ch : Char) -> Int {
 pub fn decode(input : String, delimiters : @types.Delimiters) -> String {
   let esc = delimiters.escape_char
   let esc_str = esc.to_string()
-  if !(input.contains(esc_str)) {
+  if !input.contains(esc_str) {
     return input
   }
   let chars = input.to_array()
@@ -146,12 +146,12 @@ pub fn needs_escape(input : String, delimiters : @types.Delimiters) -> Bool {
   while i < len {
     let ch = chars[i]
     if ch == delimiters.field_sep ||
-       ch == delimiters.comp_sep ||
-       ch == delimiters.rep_sep ||
-       ch == delimiters.escape_char ||
-       ch == delimiters.subcomp_sep ||
-       ch == '\r' ||
-       ch == '\n' {
+      ch == delimiters.comp_sep ||
+      ch == delimiters.rep_sep ||
+      ch == delimiters.escape_char ||
+      ch == delimiters.subcomp_sep ||
+      ch == '\r' ||
+      ch == '\n' {
       return true
     }
     i = i + 1

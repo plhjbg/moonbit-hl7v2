@@ -1,0 +1,35 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "plhjbg/moonbit-hl7v2/lib/path"
+
+import {
+  "moonbitlang/core/debug",
+  "plhjbg/moonbit-hl7v2/lib/types",
+}
+
+// Values
+pub fn find_segments(@types.Message, String) -> Array[@types.Segment]
+
+pub fn get_value(@types.Message, String) -> String
+
+pub fn get_value_from_raw(String, String) -> String
+
+pub fn get_values(@types.Message, String) -> Array[String]
+
+pub fn parse_path(String) -> Result[HL7Path, @types.HL7Error]
+
+// Errors
+
+// Types and methods
+pub(all) struct HL7Path {
+  segment_name : String
+  segment_index : Int
+  field_index : Int
+  repetition_index : Int
+  component_index : Int
+  subcomponent_index : Int
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+

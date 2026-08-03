@@ -1,0 +1,32 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "plhjbg/moonbit-hl7v2/lib/diff"
+
+import {
+  "moonbitlang/core/debug",
+  "plhjbg/moonbit-hl7v2/lib/types",
+}
+
+// Values
+pub fn diff_messages(@types.Message, @types.Message) -> DiffResult
+
+pub fn diff_raw(String, String) -> Result[DiffResult, @types.HL7Error]
+
+// Errors
+
+// Types and methods
+pub(all) enum DiffKind {
+  SegmentAdded(String)
+  SegmentDeleted(String)
+  FieldValueChanged(String, String, String)
+} derive(Eq, @debug.Debug)
+
+pub(all) struct DiffResult {
+  diffs : Array[DiffKind]
+} derive(Eq, @debug.Debug)
+pub fn DiffResult::has_diff(Self) -> Bool
+pub fn DiffResult::to_summary(Self) -> String
+
+// Type aliases
+
+// Traits
+

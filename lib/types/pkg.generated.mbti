@@ -1,0 +1,162 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "plhjbg/moonbit-hl7v2/lib/types"
+
+import {
+  "moonbitlang/core/debug",
+}
+
+// Values
+
+// Errors
+
+// Types and methods
+pub(all) struct CodedElement {
+  identifier : String
+  text : String
+  coding_system : String
+  alt_identifier : String
+  alt_text : String
+  alt_coding_system : String
+} derive(Eq, @debug.Debug)
+pub fn CodedElement::simple(String, String, String) -> Self
+
+pub(all) enum Component {
+  SimpleComp(String)
+  SubComponents(Array[String])
+} derive(Eq, @debug.Debug)
+
+pub(all) struct CompositeID {
+  id_number : String
+  check_digit : String
+  check_digit_scheme : String
+  assigning_authority : HierarchicalID
+  id_type_code : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct Delimiters {
+  field_sep : Char
+  comp_sep : Char
+  rep_sep : Char
+  escape_char : Char
+  subcomp_sep : Char
+  segment_sep : String
+} derive(Eq, @debug.Debug)
+pub fn Delimiters::custom(Char, Char, Char, Char, Char, String) -> Self
+pub fn Delimiters::default() -> Self
+pub fn Delimiters::encoding_characters(Self) -> String
+pub fn Delimiters::is_valid(Self) -> Bool
+pub fn Delimiters::to_summary(Self) -> String
+
+pub(all) struct ExtendedAddress {
+  street_address : String
+  other_designation : String
+  city : String
+  state_or_province : String
+  postal_code : String
+  country : String
+  address_type : String
+} derive(Eq, @debug.Debug)
+pub fn ExtendedAddress::make(String, String, String, String, String) -> Self
+
+pub(all) struct Field {
+  items : Array[FieldItem]
+} derive(Eq, @debug.Debug)
+pub fn Field::from_string(String) -> Self
+pub fn Field::is_empty(Self) -> Bool
+pub fn Field::make(Array[FieldItem]) -> Self
+
+pub(all) struct FieldItem {
+  components : Array[Component]
+} derive(Eq, @debug.Debug)
+pub fn FieldItem::from_string(String) -> Self
+pub fn FieldItem::make(Array[Component]) -> Self
+
+pub(all) enum HL7Error {
+  InvalidHeader(String)
+  InvalidSegment(String, Int)
+  MissingField(String, Int)
+  ParseError(String, Int, Int)
+  EscapeError(String)
+  PathSyntaxError(String)
+  ValidationError(String, String)
+  UnsupportedVersion(String)
+  ConversionError(String)
+} derive(Eq, @debug.Debug)
+pub fn HL7Error::to_formatted_string(Self) -> String
+
+pub(all) struct HL7Timestamp {
+  year : Int
+  month : Int
+  day : Int
+  hour : Int
+  minute : Int
+  second : Int
+  millisecond : Int
+  timezone : String
+  precision : TimePrecision
+} derive(Eq, @debug.Debug)
+pub fn HL7Timestamp::empty() -> Self
+pub fn HL7Timestamp::to_hl7_string(Self) -> String
+
+pub(all) struct HierarchicalID {
+  namespace_id : String
+  universal_id : String
+  universal_id_type : String
+} derive(Eq, @debug.Debug)
+pub fn HierarchicalID::make(String, String, String) -> Self
+
+pub(all) struct Message {
+  delimiters : Delimiters
+  segments : Array[Segment]
+} derive(Eq, @debug.Debug)
+pub fn Message::empty() -> Self
+pub fn Message::segment_count(Self) -> Int
+
+pub(all) struct PersonLocation {
+  point_of_care : String
+  room : String
+  bed : String
+  facility : HierarchicalID
+  location_status : String
+  person_location_type : String
+  building : String
+  floor : String
+} derive(Eq, @debug.Debug)
+
+pub(all) struct PersonName {
+  family_name : String
+  given_name : String
+  middle_name : String
+  suffix : String
+  prefix : String
+  degree : String
+  name_type_code : String
+} derive(Eq, @debug.Debug)
+pub fn PersonName::make(String, String, String) -> Self
+pub fn PersonName::to_display_name(Self) -> String
+
+pub(all) struct Segment {
+  name : String
+  fields : Array[Field]
+} derive(Eq, @debug.Debug)
+pub fn Segment::field_count(Self) -> Int
+pub fn Segment::make(String, Array[Field]) -> Self
+
+pub(all) enum SubComponent {
+  SimpleSubComp(String)
+} derive(Eq, @debug.Debug)
+
+pub(all) enum TimePrecision {
+  Year
+  Month
+  Day
+  Hour
+  Minute
+  Second
+  Millisecond
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+

@@ -10,13 +10,15 @@ pub(all) struct ObservationGroup {
 pub(all) struct ORUMessage {
   msh : @segments.MSHSegment
   pid : @segments.PIDSegment
-  pv1 : Option[@segments.PV1Segment]
+  pv1 : @segments.PV1Segment?
   groups : Array[ObservationGroup]
 } derive(Eq, Debug)
 
 ///|
 /// Constructs ORUMessage model from AST Message.
-pub fn ORUMessage::from_message(msg : @types.Message) -> Result[ORUMessage, @types.HL7Error] {
+pub fn ORUMessage::from_message(
+  msg : @types.Message,
+) -> Result[ORUMessage, @types.HL7Error] {
   if msg.segments.length() == 0 {
     return Err(@types.HL7Error::InvalidHeader("Empty message"))
   }
@@ -24,11 +26,11 @@ pub fn ORUMessage::from_message(msg : @types.Message) -> Result[ORUMessage, @typ
     Ok(m) => m
     Err(e) => return Err(e)
   }
-  let mut pid_opt : Option[@segments.PIDSegment] = None
-  let mut pv1 : Option[@segments.PV1Segment] = None
+  let mut pid_opt : @segments.PIDSegment? = None
+  let mut pv1 : @segments.PV1Segment? = None
   let groups = Array::new()
 
-  let mut current_obr : Option[@segments.OBRSegment] = None
+  let mut current_obr : @segments.OBRSegment? = None
   let mut current_obxs = Array::new()
 
   for seg in msg.segments {
@@ -77,7 +79,9 @@ pub fn ORUMessage::from_message(msg : @types.Message) -> Result[ORUMessage, @typ
 
 ///|
 /// Parses raw string directly into ORUMessage model.
-pub fn parse_oru_from_raw(raw_text : String) -> Result[ORUMessage, @types.HL7Error] {
+pub fn parse_oru_from_raw(
+  raw_text : String,
+) -> Result[ORUMessage, @types.HL7Error] {
   let msg = match @parser.parse_message(raw_text) {
     Ok(m) => m
     Err(e) => return Err(e)

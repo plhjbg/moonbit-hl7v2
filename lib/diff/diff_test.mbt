@@ -1,3 +1,4 @@
+///|
 test "diff identical messages" {
   let hl7 = "MSH|^~\\&|LIS||||||ADT^A01|1|P|2.3\rPID|1||10001||DOE^JOHN"
   let res = diff_raw(hl7, hl7)
@@ -8,6 +9,7 @@ test "diff identical messages" {
   }
 }
 
+///|
 test "diff modified field value and added segment" {
   let raw1 = "MSH|^~\\&|LIS||||||ADT^A01|1|P|2.3\rPID|1||10001||DOE^JOHN"
   let raw2 = "MSH|^~\\&|LIS||||||ADT^A01|1|P|2.3\rPID|1||10001||SMITH^JOHN\rOBX|1|NM|GLU||95"

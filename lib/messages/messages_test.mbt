@@ -1,3 +1,4 @@
+///|
 test "parse ADT_A01 high level message" {
   let hl7_raw = "MSH|^~\\&|LIS|HOSPITAL|HIS|CENTER|20260803120000||ADT^A01|MSG00001|P|2.3\rPID|1||10001||DOE^JOHN||19800101|M\rPV1|1|I|3NW^301^1||||12345^SMITH^JAMES"
   let parsed = parse_adt_from_raw(hl7_raw)
@@ -19,6 +20,7 @@ test "parse ADT_A01 high level message" {
   }
 }
 
+///|
 test "parse ORU_R01 message with observations" {
   let hl7_raw = "MSH|^~\\&|LIS||||||ORU^R01|MSG00002|P|2.3\rPID|1||10002||SMITH^MARY\rOBR|1|ORD100|LAB200|80053^Comprehensive Metabolic Panel|||20260803100000\rOBX|1|NM|GLU^Glucose||95|mg/dL|70-99|N|||F\rOBX|2|NM|NA^Sodium||140|mmol/L|135-145|N|||F"
   let parsed = parse_oru_from_raw(hl7_raw)
@@ -36,6 +38,7 @@ test "parse ORU_R01 message with observations" {
   }
 }
 
+///|
 test "ack message generation" {
   let req_raw = "MSH|^~\\&|CLIENT_APP|HOSPITAL|LIS_APP|HIS|20260803120000||ADT^A08|REQ999|P|2.3\rPID|1||P001"
   let msh_res = @segments.parse_msh_from_raw(req_raw)

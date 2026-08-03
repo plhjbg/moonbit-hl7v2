@@ -1,3 +1,4 @@
+///|
 test "msh segment model roundtrip" {
   let hl7_raw = "MSH|^~\\&|LIS|HOSPITAL|HIS|CENTER|20260803120000||ADT^A01|MSG00001|P|2.3"
   let parsed = @parser.parse_message(hl7_raw)
@@ -24,6 +25,7 @@ test "msh segment model roundtrip" {
   }
 }
 
+///|
 test "pid and obx segment models" {
   let hl7_raw = "MSH|^~\\&|LIS||||||ORU^R01|1|P|2.3\rPID|1||10001||DOE^JOHN||19800101|M\rOBX|1|NM|GLU^Glucose||95|mg/dL|70-99|N|||F"
   let parsed = @parser.parse_message(hl7_raw)

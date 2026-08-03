@@ -1,0 +1,206 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "plhjbg/moonbit-hl7v2/lib/segments"
+
+import {
+  "moonbitlang/core/debug",
+  "plhjbg/moonbit-hl7v2/lib/types",
+}
+
+// Values
+pub fn parse_msh_from_raw(String) -> Result[MSHSegment, @types.HL7Error]
+
+// Errors
+
+// Types and methods
+pub(all) struct AL1Segment {
+  set_id : String
+  allergy_type_code : String
+  allergy_code : @types.CodedElement
+  allergy_severity_code : String
+  allergy_reaction_code : String
+  identification_date : String
+} derive(Eq, @debug.Debug)
+pub fn AL1Segment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+pub(all) struct DG1Segment {
+  set_id : String
+  diagnosis_coding_method : String
+  diagnosis_code : @types.CodedElement
+  diagnosis_description : String
+  diagnosis_date_time : String
+  diagnosis_type : String
+  major_diagnostic_category : String
+} derive(Eq, @debug.Debug)
+pub fn DG1Segment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+pub(all) struct EVNSegment {
+  event_type_code : String
+  recorded_date_time : String
+  date_time_planned : String
+  event_reason_code : String
+  operator_id : String
+  event_occurred : String
+} derive(Eq, @debug.Debug)
+pub fn EVNSegment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+pub(all) struct FT1Segment {
+  set_id : String
+  transaction_id : String
+  transaction_date : String
+  transaction_posting_date : String
+  transaction_type : String
+  transaction_code : @types.CodedElement
+  transaction_amount : String
+} derive(Eq, @debug.Debug)
+pub fn FT1Segment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+pub(all) struct IN1Segment {
+  set_id : String
+  health_plan_id : @types.CodedElement
+  insurance_company_id : String
+  insurance_company_name : String
+  group_number : String
+  group_name : String
+} derive(Eq, @debug.Debug)
+pub fn IN1Segment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+pub(all) struct MSHSegment {
+  sending_app : String
+  sending_facility : String
+  receiving_app : String
+  receiving_facility : String
+  timestamp : String
+  security : String
+  message_type : String
+  trigger_event : String
+  message_control_id : String
+  processing_id : String
+  version_id : String
+} derive(Eq, @debug.Debug)
+pub fn MSHSegment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+pub fn MSHSegment::to_segment(Self, @types.Delimiters) -> @types.Segment
+
+pub(all) struct NK1Segment {
+  set_id : String
+  name : @types.PersonName
+  relationship : @types.CodedElement
+  address : @types.ExtendedAddress
+  phone_number : String
+  business_phone : String
+} derive(Eq, @debug.Debug)
+pub fn NK1Segment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+pub(all) struct OBRSegment {
+  set_id : String
+  placer_order_number : String
+  filler_order_number : String
+  universal_service_id : @types.CodedElement
+  priority : String
+  requested_date_time : String
+  observation_date_time : String
+  ordering_provider : @types.PersonName
+  result_status : String
+} derive(Eq, @debug.Debug)
+pub fn OBRSegment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+pub fn OBRSegment::to_segment(Self, @types.Delimiters) -> @types.Segment
+
+pub(all) struct OBXSegment {
+  set_id : String
+  value_type : String
+  observation_id : @types.CodedElement
+  observation_sub_id : String
+  observation_value : String
+  units : String
+  reference_range : String
+  abnormal_flags : String
+  probability : String
+  nature_of_abnormal_test : String
+  observation_result_status : String
+  date_time_of_observation : String
+} derive(Eq, @debug.Debug)
+pub fn OBXSegment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+pub fn OBXSegment::to_segment(Self, @types.Delimiters) -> @types.Segment
+
+pub(all) struct ORCSegment {
+  order_control : String
+  placer_order_number : String
+  filler_order_number : String
+  order_status : String
+  response_flag : String
+  quantity_timing : String
+  transaction_date_time : String
+  ordering_provider : @types.PersonName
+} derive(Eq, @debug.Debug)
+pub fn ORCSegment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+pub(all) struct PIDSegment {
+  set_id : String
+  patient_id : String
+  patient_identifier_list : String
+  patient_name : @types.PersonName
+  mother_maiden_name : String
+  dob : String
+  gender : String
+  patient_address : @types.ExtendedAddress
+  phone_home : String
+  phone_business : String
+  primary_language : String
+  marital_status : String
+  account_number : String
+  ssn : String
+} derive(Eq, @debug.Debug)
+pub fn PIDSegment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+pub fn PIDSegment::to_segment(Self, @types.Delimiters) -> @types.Segment
+
+pub(all) struct PR1Segment {
+  set_id : String
+  procedure_coding_method : String
+  procedure_code : @types.CodedElement
+  procedure_description : String
+  procedure_date_time : String
+} derive(Eq, @debug.Debug)
+pub fn PR1Segment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+pub(all) struct PV1Segment {
+  set_id : String
+  patient_class : String
+  assigned_location : @types.PersonLocation
+  admission_type : String
+  readmission_indicator : String
+  attending_doctor : @types.PersonName
+  referring_doctor : @types.PersonName
+  hospital_service : String
+  admit_date_time : String
+  discharge_date_time : String
+} derive(Eq, @debug.Debug)
+pub fn PV1Segment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+pub(all) struct RXESegment {
+  give_code : @types.CodedElement
+  give_amount : String
+  give_units : @types.CodedElement
+  give_dosage_form : @types.CodedElement
+} derive(Eq, @debug.Debug)
+pub fn RXESegment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+pub(all) struct RXOSegment {
+  requested_give_code : @types.CodedElement
+  requested_give_amount : String
+  requested_give_units : @types.CodedElement
+  requested_dosage_form : @types.CodedElement
+} derive(Eq, @debug.Debug)
+pub fn RXOSegment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+pub(all) struct SPMSegment {
+  set_id : String
+  specimen_id : String
+  specimen_type : @types.CodedElement
+  specimen_collection_date_time : String
+  specimen_source_site : String
+} derive(Eq, @debug.Debug)
+pub fn SPMSegment::from_segment(@types.Segment) -> Result[Self, @types.HL7Error]
+
+// Type aliases
+
+// Traits
+

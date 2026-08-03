@@ -1,4 +1,4 @@
 import {
   "plhjbg/moonbit-hl7v2/lib/types",
-  "plhjbg/moonbit-hl7v2/lib/escape"
+  "plhjbg/moonbit-hl7v2/lib/escape",
 }

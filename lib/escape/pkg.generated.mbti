@@ -1,0 +1,22 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "plhjbg/moonbit-hl7v2/lib/escape"
+
+import {
+  "plhjbg/moonbit-hl7v2/lib/types",
+}
+
+// Values
+pub fn decode(String, @types.Delimiters) -> String
+
+pub fn encode(String, @types.Delimiters) -> String
+
+pub fn needs_escape(String, @types.Delimiters) -> Bool
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

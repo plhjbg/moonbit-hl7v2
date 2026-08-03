@@ -43,17 +43,32 @@ pub fn to_xml_string(msg : @types.Message) -> String {
         for comp in item.components {
           let c_tag = f_tag + "." + c_idx.to_string()
           match comp {
-            SimpleComp(val) => {
+            SimpleComp(val) =>
               if val.length() > 0 {
-                buf.write_string("      <" + c_tag + ">" + xml_escape(val) + "</" + c_tag + ">\n")
+                buf.write_string(
+                  "      <" +
+                  c_tag +
+                  ">" +
+                  xml_escape(val) +
+                  "</" +
+                  c_tag +
+                  ">\n",
+                )
               }
-            }
             SubComponents(subs) => {
               let mut sub_idx = 1
               for sub in subs {
                 let sub_tag = c_tag + "." + sub_idx.to_string()
                 if sub.length() > 0 {
-                  buf.write_string("        <" + sub_tag + ">" + xml_escape(sub) + "</" + sub_tag + ">\n")
+                  buf.write_string(
+                    "        <" +
+                    sub_tag +
+                    ">" +
+                    xml_escape(sub) +
+                    "</" +
+                    sub_tag +
+                    ">\n",
+                  )
                 }
                 sub_idx = sub_idx + 1
               }

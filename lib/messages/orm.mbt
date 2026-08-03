@@ -2,8 +2,8 @@
 /// Order group structure for ORM (General Order) message.
 pub(all) struct OrderGroup {
   orc : @segments.ORCSegment
-  obr : Option[@segments.OBRSegment]
-  rxo : Option[@segments.RXOSegment]
+  obr : @segments.OBRSegment?
+  rxo : @segments.RXOSegment?
 } derive(Eq, Debug)
 
 ///|
@@ -16,7 +16,9 @@ pub(all) struct ORMMessage {
 
 ///|
 /// Constructs ORMMessage model from AST Message.
-pub fn ORMMessage::from_message(msg : @types.Message) -> Result[ORMMessage, @types.HL7Error] {
+pub fn ORMMessage::from_message(
+  msg : @types.Message,
+) -> Result[ORMMessage, @types.HL7Error] {
   if msg.segments.length() == 0 {
     return Err(@types.HL7Error::InvalidHeader("Empty message"))
   }
@@ -24,12 +26,12 @@ pub fn ORMMessage::from_message(msg : @types.Message) -> Result[ORMMessage, @typ
     Ok(m) => m
     Err(e) => return Err(e)
   }
-  let mut pid_opt : Option[@segments.PIDSegment] = None
+  let mut pid_opt : @segments.PIDSegment? = None
   let orders = Array::new()
 
-  let mut current_orc : Option[@segments.ORCSegment] = None
-  let mut current_obr : Option[@segments.OBRSegment] = None
-  let mut current_rxo : Option[@segments.RXOSegment] = None
+  let mut current_orc : @segments.ORCSegment? = None
+  let mut current_obr : @segments.OBRSegment? = None
+  let mut current_rxo : @segments.RXOSegment? = None
 
   for seg in msg.segments {
     if seg.name == "PID" {
@@ -90,7 +92,7 @@ pub(all) struct ACKMessage {
 pub fn ACKMessage::make_ack(
   req_msh : @segments.MSHSegment,
   ack_code : String,
-  text_message : String
+  text_message : String,
 ) -> ACKMessage {
   let resp_msh : @segments.MSHSegment = {
     sending_app: req_msh.receiving_app,

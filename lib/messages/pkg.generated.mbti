@@ -1,0 +1,66 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "plhjbg/moonbit-hl7v2/lib/messages"
+
+import {
+  "moonbitlang/core/debug",
+  "plhjbg/moonbit-hl7v2/lib/segments",
+  "plhjbg/moonbit-hl7v2/lib/types",
+}
+
+// Values
+pub fn parse_adt_from_raw(String) -> Result[ADTMessage, @types.HL7Error]
+
+pub fn parse_oru_from_raw(String) -> Result[ORUMessage, @types.HL7Error]
+
+// Errors
+
+// Types and methods
+pub(all) struct ACKMessage {
+  msh : @segments.MSHSegment
+  acknowledgment_code : String
+  text_message : String
+  referenced_message_control_id : String
+} derive(Eq, @debug.Debug)
+pub fn ACKMessage::make_ack(@segments.MSHSegment, String, String) -> Self
+
+pub(all) struct ADTMessage {
+  msh : @segments.MSHSegment
+  evn : @segments.EVNSegment?
+  pid : @segments.PIDSegment
+  pv1 : @segments.PV1Segment?
+  diagnoses : Array[@segments.DG1Segment]
+  allergies : Array[@segments.AL1Segment]
+  next_of_kin : Array[@segments.NK1Segment]
+} derive(Eq, @debug.Debug)
+pub fn ADTMessage::from_message(@types.Message) -> Result[Self, @types.HL7Error]
+
+pub(all) struct ORMMessage {
+  msh : @segments.MSHSegment
+  pid : @segments.PIDSegment
+  orders : Array[OrderGroup]
+} derive(Eq, @debug.Debug)
+pub fn ORMMessage::from_message(@types.Message) -> Result[Self, @types.HL7Error]
+
+pub(all) struct ORUMessage {
+  msh : @segments.MSHSegment
+  pid : @segments.PIDSegment
+  pv1 : @segments.PV1Segment?
+  groups : Array[ObservationGroup]
+} derive(Eq, @debug.Debug)
+pub fn ORUMessage::from_message(@types.Message) -> Result[Self, @types.HL7Error]
+
+pub(all) struct ObservationGroup {
+  obr : @segments.OBRSegment
+  observations : Array[@segments.OBXSegment]
+} derive(Eq, @debug.Debug)
+
+pub(all) struct OrderGroup {
+  orc : @segments.ORCSegment
+  obr : @segments.OBRSegment?
+  rxo : @segments.RXOSegment?
+} derive(Eq, @debug.Debug)
+
+// Type aliases
+
+// Traits
+

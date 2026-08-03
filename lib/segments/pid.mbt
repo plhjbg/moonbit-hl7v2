@@ -19,9 +19,16 @@ pub(all) struct PIDSegment {
 
 ///|
 /// Extracts PIDSegment model from AST Segment.
-pub fn PIDSegment::from_segment(seg : @types.Segment) -> Result[PIDSegment, @types.HL7Error] {
+pub fn PIDSegment::from_segment(
+  seg : @types.Segment,
+) -> Result[PIDSegment, @types.HL7Error] {
   if seg.name != "PID" {
-    return Err(@types.HL7Error::InvalidSegment("Expected PID segment, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment(
+        "Expected PID segment, found: " + seg.name,
+        1,
+      ),
+    )
   }
   let set_id = get_field_comp(seg, 1, 1)
   let patient_id = get_field_comp(seg, 2, 1)
@@ -41,7 +48,9 @@ pub fn PIDSegment::from_segment(seg : @types.Segment) -> Result[PIDSegment, @typ
   let state = get_field_comp(seg, 11, 4)
   let zip = get_field_comp(seg, 11, 5)
   let country = get_field_comp(seg, 11, 6)
-  let patient_address = @types.ExtendedAddress::make(street, city, state, zip, country)
+  let patient_address = @types.ExtendedAddress::make(
+    street, city, state, zip, country,
+  )
 
   let phone_home = get_field_comp(seg, 13, 1)
   let phone_business = get_field_comp(seg, 14, 1)
@@ -70,7 +79,10 @@ pub fn PIDSegment::from_segment(seg : @types.Segment) -> Result[PIDSegment, @typ
 
 ///|
 /// Converts PIDSegment model into AST Segment node.
-pub fn PIDSegment::to_segment(self : PIDSegment, delimiters : @types.Delimiters) -> @types.Segment {
+pub fn PIDSegment::to_segment(
+  self : PIDSegment,
+  delimiters : @types.Delimiters,
+) -> @types.Segment {
   let fields = Array::new()
   fields.push(@types.Field::from_string(self.set_id))
   fields.push(@types.Field::from_string(self.patient_id))

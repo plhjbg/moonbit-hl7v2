@@ -60,14 +60,29 @@ pub fn ValidationReport::warning_count(self : ValidationReport) -> Int {
 /// Formats report as human-readable diagnostic text.
 pub fn ValidationReport::to_summary(self : ValidationReport) -> String {
   let buf = StringBuilder::new()
-  buf.write_string("Validation Summary: Errors=" + self.error_count().to_string() + ", Warnings=" + self.warning_count().to_string() + "\n")
+  buf.write_string(
+    "Validation Summary: Errors=" +
+    self.error_count().to_string() +
+    ", Warnings=" +
+    self.warning_count().to_string() +
+    "\n",
+  )
   for issue in self.issues {
     let sev_str = match issue.severity {
       Error => "[ERROR]"
       Warning => "[WARN ]"
       Info => "[INFO ]"
     }
-    buf.write_string(sev_str + " Rule " + issue.rule_id + " (" + issue.path + "): " + issue.message + "\n")
+    buf.write_string(
+      sev_str +
+      " Rule " +
+      issue.rule_id +
+      " (" +
+      issue.path +
+      "): " +
+      issue.message +
+      "\n",
+    )
   }
   buf.to_string()
 }

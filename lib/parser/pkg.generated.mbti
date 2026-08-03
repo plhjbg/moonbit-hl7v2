@@ -1,0 +1,34 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "plhjbg/moonbit-hl7v2/lib/parser"
+
+import {
+  "plhjbg/moonbit-hl7v2/lib/types",
+}
+
+// Values
+pub fn extract_msh_delimiters(String) -> Result[@types.Delimiters, @types.HL7Error]
+
+pub fn parse_batch(String) -> Array[Result[@types.Message, @types.HL7Error]]
+
+pub fn parse_component(String, @types.Delimiters) -> @types.Component
+
+pub fn parse_field(String, @types.Delimiters) -> @types.Field
+
+pub fn parse_field_item(String, @types.Delimiters) -> @types.FieldItem
+
+pub fn parse_message(String) -> Result[@types.Message, @types.HL7Error]
+
+pub fn parse_segment(String, @types.Delimiters, Int) -> Result[@types.Segment, @types.HL7Error]
+
+pub fn split_by_char(String, Char) -> Array[String]
+
+pub fn split_segments(String) -> Array[String]
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

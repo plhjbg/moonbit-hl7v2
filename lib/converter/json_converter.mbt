@@ -30,7 +30,9 @@ fn json_escape(s : String) -> String {
 pub fn to_json_string(msg : @types.Message) -> String {
   let buf = StringBuilder::new()
   buf.write_string("{\n")
-  buf.write_string("  \"delimiters\": \"" + json_escape(msg.delimiters.to_summary()) + "\",\n")
+  buf.write_string(
+    "  \"delimiters\": \"" + json_escape(msg.delimiters.to_summary()) + "\",\n",
+  )
   buf.write_string("  \"segments\": [\n")
   let mut seg_first = true
   for seg in msg.segments {
@@ -62,7 +64,8 @@ pub fn to_json_string(msg : @types.Message) -> String {
           }
           comp_first = false
           match comp {
-            SimpleComp(s) => buf.write_string("            \"" + json_escape(s) + "\"")
+            SimpleComp(s) =>
+              buf.write_string("            \"" + json_escape(s) + "\"")
             SubComponents(subs) => {
               buf.write_string("            [\n")
               let mut sub_first = true

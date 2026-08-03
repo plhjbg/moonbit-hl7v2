@@ -1,0 +1,30 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "plhjbg/moonbit-hl7v2/lib/serializer"
+
+import {
+  "plhjbg/moonbit-hl7v2/lib/types",
+}
+
+// Values
+pub fn reformat_raw_hl7(String, String) -> Result[String, @types.HL7Error]
+
+pub fn serialize_component(@types.Component, @types.Delimiters) -> String
+
+pub fn serialize_field(@types.Field, @types.Delimiters) -> String
+
+pub fn serialize_field_item(@types.FieldItem, @types.Delimiters) -> String
+
+pub fn serialize_message(@types.Message) -> String
+
+pub fn serialize_message_with_line_ending(@types.Message, String) -> String
+
+pub fn serialize_segment(@types.Segment, @types.Delimiters) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

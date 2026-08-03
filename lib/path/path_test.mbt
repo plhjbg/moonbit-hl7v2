@@ -1,3 +1,4 @@
+///|
 test "path syntax parser" {
   let p1 = parse_path("PID-3.1.2")
   assert_true(p1 is Ok(_))
@@ -25,6 +26,7 @@ test "path syntax parser" {
   }
 }
 
+///|
 test "get value from message using path" {
   let hl7_raw = "MSH|^~\\&|LIS|HOSPITAL|HIS|CENTER|20260803120000||ADT^A01|MSG00001|P|2.3\rPID|1||10001^^^HOSPITAL||DOE^JOHN^EDWARD||19800101|M"
   let parsed = @parser.parse_message(hl7_raw)

@@ -35,7 +35,8 @@ pub fn HL7Error::to_formatted_string(self : HL7Error) -> String {
       ", Col " +
       col.to_string() +
       ")"
-    EscapeError(seq) => "[HL7 Escape Error] Unrecognized escape sequence: " + seq
+    EscapeError(seq) =>
+      "[HL7 Escape Error] Unrecognized escape sequence: " + seq
     PathSyntaxError(path) =>
       "[HL7 Path Error] Invalid path expression: '" + path + "'"
     ValidationError(rule_id, detail) =>

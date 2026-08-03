@@ -52,27 +52,47 @@ pub fn HL7Timestamp::to_hl7_string(self : HL7Timestamp) -> String {
   if self.precision == Year {
     return buf.to_string()
   }
-  let m_str = if self.month < 10 { "0" + self.month.to_string() } else { self.month.to_string() }
+  let m_str = if self.month < 10 {
+    "0" + self.month.to_string()
+  } else {
+    self.month.to_string()
+  }
   buf.write_string(m_str)
   if self.precision == Month {
     return buf.to_string()
   }
-  let d_str = if self.day < 10 { "0" + self.day.to_string() } else { self.day.to_string() }
+  let d_str = if self.day < 10 {
+    "0" + self.day.to_string()
+  } else {
+    self.day.to_string()
+  }
   buf.write_string(d_str)
   if self.precision == Day {
     return buf.to_string()
   }
-  let h_str = if self.hour < 10 { "0" + self.hour.to_string() } else { self.hour.to_string() }
+  let h_str = if self.hour < 10 {
+    "0" + self.hour.to_string()
+  } else {
+    self.hour.to_string()
+  }
   buf.write_string(h_str)
   if self.precision == Hour {
     return buf.to_string()
   }
-  let min_str = if self.minute < 10 { "0" + self.minute.to_string() } else { self.minute.to_string() }
+  let min_str = if self.minute < 10 {
+    "0" + self.minute.to_string()
+  } else {
+    self.minute.to_string()
+  }
   buf.write_string(min_str)
   if self.precision == Minute {
     return buf.to_string()
   }
-  let s_str = if self.second < 10 { "0" + self.second.to_string() } else { self.second.to_string() }
+  let s_str = if self.second < 10 {
+    "0" + self.second.to_string()
+  } else {
+    self.second.to_string()
+  }
   buf.write_string(s_str)
   if self.precision == Second {
     if self.timezone.length() > 0 {
@@ -104,7 +124,11 @@ pub(all) struct HierarchicalID {
 
 ///|
 /// Creates a HierarchicalID.
-pub fn HierarchicalID::make(namespace_id : String, universal_id : String, universal_id_type : String) -> HierarchicalID {
+pub fn HierarchicalID::make(
+  namespace_id : String,
+  universal_id : String,
+  universal_id_type : String,
+) -> HierarchicalID {
   { namespace_id, universal_id, universal_id_type }
 }
 
@@ -121,7 +145,11 @@ pub(all) struct CodedElement {
 
 ///|
 /// Creates a simple CodedElement with identifier, text, and coding system.
-pub fn CodedElement::simple(identifier : String, text : String, coding_system : String) -> CodedElement {
+pub fn CodedElement::simple(
+  identifier : String,
+  text : String,
+  coding_system : String,
+) -> CodedElement {
   {
     identifier,
     text,
@@ -146,7 +174,11 @@ pub(all) struct PersonName {
 
 ///|
 /// Creates a PersonName.
-pub fn PersonName::make(family_name : String, given_name : String, middle_name : String) -> PersonName {
+pub fn PersonName::make(
+  family_name : String,
+  given_name : String,
+  middle_name : String,
+) -> PersonName {
   {
     family_name,
     given_name,
@@ -207,7 +239,7 @@ pub fn ExtendedAddress::make(
   city : String,
   state : String,
   zip : String,
-  country : String
+  country : String,
 ) -> ExtendedAddress {
   {
     street_address: street,

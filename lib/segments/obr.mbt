@@ -14,9 +14,16 @@ pub(all) struct OBRSegment {
 
 ///|
 /// Extracts OBRSegment model from AST Segment.
-pub fn OBRSegment::from_segment(seg : @types.Segment) -> Result[OBRSegment, @types.HL7Error] {
+pub fn OBRSegment::from_segment(
+  seg : @types.Segment,
+) -> Result[OBRSegment, @types.HL7Error] {
   if seg.name != "OBR" {
-    return Err(@types.HL7Error::InvalidSegment("Expected OBR segment, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment(
+        "Expected OBR segment, found: " + seg.name,
+        1,
+      ),
+    )
   }
   let set_id = get_field_comp(seg, 1, 1)
   let placer_order_number = get_field_comp(seg, 2, 1)
@@ -25,7 +32,9 @@ pub fn OBRSegment::from_segment(seg : @types.Segment) -> Result[OBRSegment, @typ
   let id_code = get_field_comp(seg, 4, 1)
   let id_text = get_field_comp(seg, 4, 2)
   let id_sys = get_field_comp(seg, 4, 3)
-  let universal_service_id = @types.CodedElement::simple(id_code, id_text, id_sys)
+  let universal_service_id = @types.CodedElement::simple(
+    id_code, id_text, id_sys,
+  )
 
   let priority = get_field_comp(seg, 5, 1)
   let requested_date_time = get_field_comp(seg, 6, 1)
@@ -52,7 +61,10 @@ pub fn OBRSegment::from_segment(seg : @types.Segment) -> Result[OBRSegment, @typ
 
 ///|
 /// Converts OBRSegment model into AST Segment node.
-pub fn OBRSegment::to_segment(self : OBRSegment, delimiters : @types.Delimiters) -> @types.Segment {
+pub fn OBRSegment::to_segment(
+  self : OBRSegment,
+  delimiters : @types.Delimiters,
+) -> @types.Segment {
   let fields = Array::new()
   fields.push(@types.Field::from_string(self.set_id))
   fields.push(@types.Field::from_string(self.placer_order_number))

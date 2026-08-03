@@ -136,7 +136,7 @@ pub fn validate_message(msg : @types.Message) -> ValidationReport {
       }
       let val = @path.get_value(msg, prefix + "-5")
       if val_type == "NM" && val.length() > 0 {
-        if !(is_numeric(val)) {
+        if !is_numeric(val) {
           issues.push({
             rule_id: "TYPE-NM-001",
             severity: Error,
@@ -149,7 +149,8 @@ pub fn validate_message(msg : @types.Message) -> ValidationReport {
   }
 
   let msg_type = @path.get_value(msg, "MSH-9.1")
-  if (msg_type == "ADT" || msg_type == "ORU" || msg_type == "ORM") && pid_count == 0 {
+  if (msg_type == "ADT" || msg_type == "ORU" || msg_type == "ORM") &&
+    pid_count == 0 {
     issues.push({
       rule_id: "STRUCT-001",
       severity: Error,
@@ -167,12 +168,14 @@ pub fn validate_raw(raw_text : String) -> ValidationReport {
   match @parser.parse_message(raw_text) {
     Ok(msg) => validate_message(msg)
     Err(e) => {
-      let issues = [{
-        rule_id: "PARSE-001",
-        severity: Error,
-        path: "ROOT",
-        message: e.to_formatted_string(),
-      }]
+      let issues = [
+        {
+          rule_id: "PARSE-001",
+          severity: Error,
+          path: "ROOT",
+          message: e.to_formatted_string(),
+        },
+      ]
       { issues, }
     }
   }

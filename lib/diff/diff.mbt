@@ -25,13 +25,18 @@ pub fn DiffResult::to_summary(self : DiffResult) -> String {
     return "Messages are structurally identical."
   }
   let buf = StringBuilder::new()
-  buf.write_string("Differences found (" + self.diffs.length().to_string() + "):\n")
+  buf.write_string(
+    "Differences found (" + self.diffs.length().to_string() + "):\n",
+  )
   for d in self.diffs {
     match d {
       SegmentAdded(s) => buf.write_string("  [+] Segment Added: " + s + "\n")
-      SegmentDeleted(s) => buf.write_string("  [-] Segment Deleted: " + s + "\n")
+      SegmentDeleted(s) =>
+        buf.write_string("  [-] Segment Deleted: " + s + "\n")
       FieldValueChanged(path, old_v, new_v) =>
-        buf.write_string("  [*] Field " + path + ": '" + old_v + "' -> '" + new_v + "'\n")
+        buf.write_string(
+          "  [*] Field " + path + ": '" + old_v + "' -> '" + new_v + "'\n",
+        )
     }
   }
   buf.to_string()
@@ -39,7 +44,10 @@ pub fn DiffResult::to_summary(self : DiffResult) -> String {
 
 ///|
 /// Compares two HL7 Message ASTs and identifies segment and field value deltas.
-pub fn diff_messages(msg1 : @types.Message, msg2 : @types.Message) -> DiffResult {
+pub fn diff_messages(
+  msg1 : @types.Message,
+  msg2 : @types.Message,
+) -> DiffResult {
   let diffs = Array::new()
   let segs1 = msg1.segments
   let segs2 = msg2.segments
@@ -81,13 +89,17 @@ pub fn diff_messages(msg1 : @types.Message, msg2 : @types.Message) -> DiffResult
   }
 
   while i < len1 {
-    diffs.push(DiffKind::SegmentDeleted(segs1[i].name + "[" + i.to_string() + "]"))
+    diffs.push(
+      DiffKind::SegmentDeleted(segs1[i].name + "[" + i.to_string() + "]"),
+    )
     i = i + 1
   }
 
   let mut j = i
   while j < len2 {
-    diffs.push(DiffKind::SegmentAdded(segs2[j].name + "[" + j.to_string() + "]"))
+    diffs.push(
+      DiffKind::SegmentAdded(segs2[j].name + "[" + j.to_string() + "]"),
+    )
     j = j + 1
   }
 
@@ -96,7 +108,10 @@ pub fn diff_messages(msg1 : @types.Message, msg2 : @types.Message) -> DiffResult
 
 ///|
 /// Convenience entry: Compares two raw HL7 text payloads.
-pub fn diff_raw(raw1 : String, raw2 : String) -> Result[DiffResult, @types.HL7Error] {
+pub fn diff_raw(
+  raw1 : String,
+  raw2 : String,
+) -> Result[DiffResult, @types.HL7Error] {
   let m1 = match @parser.parse_message(raw1) {
     Ok(m) => m
     Err(e) => return Err(e)

@@ -9,9 +9,14 @@ pub(all) struct EVNSegment {
   event_occurred : String
 } derive(Eq, Debug)
 
-pub fn EVNSegment::from_segment(seg : @types.Segment) -> Result[EVNSegment, @types.HL7Error] {
+///|
+pub fn EVNSegment::from_segment(
+  seg : @types.Segment,
+) -> Result[EVNSegment, @types.HL7Error] {
   if seg.name != "EVN" {
-    return Err(@types.HL7Error::InvalidSegment("Expected EVN, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment("Expected EVN, found: " + seg.name, 1),
+    )
   }
   Ok({
     event_type_code: get_field_comp(seg, 1, 1),
@@ -36,9 +41,14 @@ pub(all) struct ORCSegment {
   ordering_provider : @types.PersonName
 } derive(Eq, Debug)
 
-pub fn ORCSegment::from_segment(seg : @types.Segment) -> Result[ORCSegment, @types.HL7Error] {
+///|
+pub fn ORCSegment::from_segment(
+  seg : @types.Segment,
+) -> Result[ORCSegment, @types.HL7Error] {
   if seg.name != "ORC" {
-    return Err(@types.HL7Error::InvalidSegment("Expected ORC, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment("Expected ORC, found: " + seg.name, 1),
+    )
   }
   let prov_fam = get_field_comp(seg, 12, 2)
   let prov_giv = get_field_comp(seg, 12, 3)
@@ -66,9 +76,14 @@ pub(all) struct DG1Segment {
   major_diagnostic_category : String
 } derive(Eq, Debug)
 
-pub fn DG1Segment::from_segment(seg : @types.Segment) -> Result[DG1Segment, @types.HL7Error] {
+///|
+pub fn DG1Segment::from_segment(
+  seg : @types.Segment,
+) -> Result[DG1Segment, @types.HL7Error] {
   if seg.name != "DG1" {
-    return Err(@types.HL7Error::InvalidSegment("Expected DG1, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment("Expected DG1, found: " + seg.name, 1),
+    )
   }
   let code = get_field_comp(seg, 3, 1)
   let txt = get_field_comp(seg, 3, 2)
@@ -95,9 +110,14 @@ pub(all) struct AL1Segment {
   identification_date : String
 } derive(Eq, Debug)
 
-pub fn AL1Segment::from_segment(seg : @types.Segment) -> Result[AL1Segment, @types.HL7Error] {
+///|
+pub fn AL1Segment::from_segment(
+  seg : @types.Segment,
+) -> Result[AL1Segment, @types.HL7Error] {
   if seg.name != "AL1" {
-    return Err(@types.HL7Error::InvalidSegment("Expected AL1, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment("Expected AL1, found: " + seg.name, 1),
+    )
   }
   let code = get_field_comp(seg, 3, 1)
   let txt = get_field_comp(seg, 3, 2)
@@ -123,9 +143,14 @@ pub(all) struct NK1Segment {
   business_phone : String
 } derive(Eq, Debug)
 
-pub fn NK1Segment::from_segment(seg : @types.Segment) -> Result[NK1Segment, @types.HL7Error] {
+///|
+pub fn NK1Segment::from_segment(
+  seg : @types.Segment,
+) -> Result[NK1Segment, @types.HL7Error] {
   if seg.name != "NK1" {
-    return Err(@types.HL7Error::InvalidSegment("Expected NK1, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment("Expected NK1, found: " + seg.name, 1),
+    )
   }
   let fam = get_field_comp(seg, 2, 1)
   let giv = get_field_comp(seg, 2, 2)
@@ -160,9 +185,14 @@ pub(all) struct RXOSegment {
   requested_dosage_form : @types.CodedElement
 } derive(Eq, Debug)
 
-pub fn RXOSegment::from_segment(seg : @types.Segment) -> Result[RXOSegment, @types.HL7Error] {
+///|
+pub fn RXOSegment::from_segment(
+  seg : @types.Segment,
+) -> Result[RXOSegment, @types.HL7Error] {
   if seg.name != "RXO" {
-    return Err(@types.HL7Error::InvalidSegment("Expected RXO, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment("Expected RXO, found: " + seg.name, 1),
+    )
   }
   let gc = get_field_comp(seg, 1, 1)
   let gt = get_field_comp(seg, 1, 2)
@@ -193,9 +223,14 @@ pub(all) struct RXESegment {
   give_dosage_form : @types.CodedElement
 } derive(Eq, Debug)
 
-pub fn RXESegment::from_segment(seg : @types.Segment) -> Result[RXESegment, @types.HL7Error] {
+///|
+pub fn RXESegment::from_segment(
+  seg : @types.Segment,
+) -> Result[RXESegment, @types.HL7Error] {
   if seg.name != "RXE" {
-    return Err(@types.HL7Error::InvalidSegment("Expected RXE, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment("Expected RXE, found: " + seg.name, 1),
+    )
   }
   let gc = get_field_comp(seg, 2, 1)
   let gt = get_field_comp(seg, 2, 2)
@@ -229,9 +264,14 @@ pub(all) struct FT1Segment {
   transaction_amount : String
 } derive(Eq, Debug)
 
-pub fn FT1Segment::from_segment(seg : @types.Segment) -> Result[FT1Segment, @types.HL7Error] {
+///|
+pub fn FT1Segment::from_segment(
+  seg : @types.Segment,
+) -> Result[FT1Segment, @types.HL7Error] {
   if seg.name != "FT1" {
-    return Err(@types.HL7Error::InvalidSegment("Expected FT1, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment("Expected FT1, found: " + seg.name, 1),
+    )
   }
   let tc = get_field_comp(seg, 7, 1)
   let tt = get_field_comp(seg, 7, 2)
@@ -259,9 +299,14 @@ pub(all) struct IN1Segment {
   group_name : String
 } derive(Eq, Debug)
 
-pub fn IN1Segment::from_segment(seg : @types.Segment) -> Result[IN1Segment, @types.HL7Error] {
+///|
+pub fn IN1Segment::from_segment(
+  seg : @types.Segment,
+) -> Result[IN1Segment, @types.HL7Error] {
   if seg.name != "IN1" {
-    return Err(@types.HL7Error::InvalidSegment("Expected IN1, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment("Expected IN1, found: " + seg.name, 1),
+    )
   }
   let pc = get_field_comp(seg, 2, 1)
   let pt = get_field_comp(seg, 2, 2)
@@ -287,9 +332,14 @@ pub(all) struct PR1Segment {
   procedure_date_time : String
 } derive(Eq, Debug)
 
-pub fn PR1Segment::from_segment(seg : @types.Segment) -> Result[PR1Segment, @types.HL7Error] {
+///|
+pub fn PR1Segment::from_segment(
+  seg : @types.Segment,
+) -> Result[PR1Segment, @types.HL7Error] {
   if seg.name != "PR1" {
-    return Err(@types.HL7Error::InvalidSegment("Expected PR1, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment("Expected PR1, found: " + seg.name, 1),
+    )
   }
   let pc = get_field_comp(seg, 3, 1)
   let pt = get_field_comp(seg, 3, 2)
@@ -315,9 +365,14 @@ pub(all) struct SPMSegment {
   specimen_source_site : String
 } derive(Eq, Debug)
 
-pub fn SPMSegment::from_segment(seg : @types.Segment) -> Result[SPMSegment, @types.HL7Error] {
+///|
+pub fn SPMSegment::from_segment(
+  seg : @types.Segment,
+) -> Result[SPMSegment, @types.HL7Error] {
   if seg.name != "SPM" {
-    return Err(@types.HL7Error::InvalidSegment("Expected SPM, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment("Expected SPM, found: " + seg.name, 1),
+    )
   }
   let stc = get_field_comp(seg, 4, 1)
   let stt = get_field_comp(seg, 4, 2)

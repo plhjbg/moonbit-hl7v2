@@ -59,10 +59,16 @@ pub fn to_fhir_observation_json(msg : @types.Message) -> String {
   buf.write_string("    }]\n")
   buf.write_string("  },\n")
   buf.write_string("  \"subject\": {\n")
-  buf.write_string("    \"reference\": \"Patient/" + json_escape(pid_id) + "\"\n")
+  buf.write_string(
+    "    \"reference\": \"Patient/" + json_escape(pid_id) + "\"\n",
+  )
   buf.write_string("  },\n")
   buf.write_string("  \"valueQuantity\": {\n")
-  buf.write_string("    \"value\": " + (if obs_val.length() > 0 { obs_val } else { "0" }) + ",\n")
+  buf.write_string(
+    "    \"value\": " +
+    (if obs_val.length() > 0 { obs_val } else { "0" }) +
+    ",\n",
+  )
   buf.write_string("    \"unit\": \"" + json_escape(units) + "\"\n")
   buf.write_string("  },\n")
   buf.write_string("  \"referenceRange\": [{\n")
@@ -80,7 +86,9 @@ pub fn to_markdown_summary(msg : @types.Message) -> String {
   let control_id = @path.get_value(msg, "MSH-10")
   let sender = @path.get_value(msg, "MSH-3")
   let pid_id = @path.get_value(msg, "PID-3.1")
-  let pat_name = @path.get_value(msg, "PID-5.2") + " " + @path.get_value(msg, "PID-5.1")
+  let pat_name = @path.get_value(msg, "PID-5.2") +
+    " " +
+    @path.get_value(msg, "PID-5.1")
   let gender = @path.get_value(msg, "PID-8")
   let dob = @path.get_value(msg, "PID-7")
 
@@ -98,7 +106,9 @@ pub fn to_markdown_summary(msg : @types.Message) -> String {
   let obx_segs = @path.find_segments(msg, "OBX")
   if obx_segs.length() > 0 {
     buf.write_string("## Observation & Lab Results\n\n")
-    buf.write_string("| Test ID | Test Description | Value | Units | Reference Range | Flag |\n")
+    buf.write_string(
+      "| Test ID | Test Description | Value | Units | Reference Range | Flag |\n",
+    )
     buf.write_string("| :--- | :--- | :--- | :--- | :--- | :--- |\n")
     let mut i = 0
     while i < obx_segs.length() {
@@ -109,7 +119,21 @@ pub fn to_markdown_summary(msg : @types.Message) -> String {
       let units = @path.get_value(msg, prefix + "-6")
       let ref_r = @path.get_value(msg, prefix + "-7")
       let flag = @path.get_value(msg, prefix + "-8")
-      buf.write_string("| `" + t_id + "` | " + t_desc + " | **" + val + "** | " + units + " | " + ref_r + " | " + flag + " |\n")
+      buf.write_string(
+        "| `" +
+        t_id +
+        "` | " +
+        t_desc +
+        " | **" +
+        val +
+        "** | " +
+        units +
+        " | " +
+        ref_r +
+        " | " +
+        flag +
+        " |\n",
+      )
       i = i + 1
     }
   }

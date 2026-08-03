@@ -1,3 +1,4 @@
+///|
 test "escape decode basic delimiters" {
   let d = @types.Delimiters::default()
   let raw = "Blood\\S\\Pressure\\F\\Test"
@@ -5,6 +6,7 @@ test "escape decode basic delimiters" {
   assert_eq(decoded, "Blood^Pressure|Test")
 }
 
+///|
 test "escape decode hex bytes and line break" {
   let d = @types.Delimiters::default()
   let raw = "Line 1\\.br\\Line 2\\X0D\\CarriageReturn"
@@ -12,6 +14,7 @@ test "escape decode hex bytes and line break" {
   assert_eq(decoded, "Line 1\nLine 2\rCarriageReturn")
 }
 
+///|
 test "escape encode roundtrip" {
   let d = @types.Delimiters::default()
   let original = "Field|Comp^Rep~Esc\\Sub&Text"
@@ -21,6 +24,7 @@ test "escape encode roundtrip" {
   assert_eq(roundtrip, original)
 }
 
+///|
 test "needs_escape predicate" {
   let d = @types.Delimiters::default()
   assert_true(needs_escape("Hello|World", d))

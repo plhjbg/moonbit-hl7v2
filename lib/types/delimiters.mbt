@@ -37,16 +37,9 @@ pub fn Delimiters::custom(
   rep_sep : Char,
   escape_char : Char,
   subcomp_sep : Char,
-  segment_sep : String
+  segment_sep : String,
 ) -> Delimiters {
-  {
-    field_sep,
-    comp_sep,
-    rep_sep,
-    escape_char,
-    subcomp_sep,
-    segment_sep,
-  }
+  { field_sep, comp_sep, rep_sep, escape_char, subcomp_sep, segment_sep }
 }
 
 ///|
@@ -68,9 +61,15 @@ pub fn Delimiters::is_valid(self : Delimiters) -> Bool {
   let r = self.rep_sep
   let e = self.escape_char
   let s = self.subcomp_sep
-  f != c && f != r && f != e && f != s &&
-  c != r && c != e && c != s &&
-  r != e && r != s &&
+  f != c &&
+  f != r &&
+  f != e &&
+  f != s &&
+  c != r &&
+  c != e &&
+  c != s &&
+  r != e &&
+  r != s &&
   e != s
 }
 

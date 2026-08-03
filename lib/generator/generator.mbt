@@ -4,7 +4,7 @@ pub fn generate_adt_a01(
   patient_id : String,
   family_name : String,
   given_name : String,
-  gender : String
+  gender : String,
 ) -> String {
   let delims = @types.Delimiters::default()
   let msh_seg = @types.Segment::make("MSH", [
@@ -16,13 +16,21 @@ pub fn generate_adt_a01(
     @types.Field::from_string("CENTER_FACILITY"),
     @types.Field::from_string("20260803140000"),
     @types.Field::from_string(""),
-    @types.Field::make([@types.FieldItem::make([@types.Component::SimpleComp("ADT"), @types.Component::SimpleComp("A01")])]),
+    @types.Field::make([
+      @types.FieldItem::make([
+        @types.Component::SimpleComp("ADT"),
+        @types.Component::SimpleComp("A01"),
+      ]),
+    ]),
     @types.Field::from_string("MSG_" + patient_id),
     @types.Field::from_string("P"),
     @types.Field::from_string("2.3"),
   ])
 
-  let name_item = @types.FieldItem::make([@types.Component::SimpleComp(family_name), @types.Component::SimpleComp(given_name)])
+  let name_item = @types.FieldItem::make([
+    @types.Component::SimpleComp(family_name),
+    @types.Component::SimpleComp(given_name),
+  ])
   let pid_seg = @types.Segment::make("PID", [
     @types.Field::from_string("1"),
     @types.Field::from_string(""),
@@ -44,7 +52,10 @@ pub fn generate_adt_a01(
     @types.Field::from_string("EMERGENCY"),
   ])
 
-  let msg : @types.Message = { delimiters: delims, segments: [msh_seg, pid_seg, pv1_seg] }
+  let msg : @types.Message = {
+    delimiters: delims,
+    segments: [msh_seg, pid_seg, pv1_seg],
+  }
   @serializer.serialize_message(msg)
 }
 
@@ -56,7 +67,7 @@ pub fn generate_oru_r01(
   test_name : String,
   result_val : String,
   units : String,
-  ref_range : String
+  ref_range : String,
 ) -> String {
   let delims = @types.Delimiters::default()
   let msh_seg = @types.Segment::make("MSH", [
@@ -68,7 +79,12 @@ pub fn generate_oru_r01(
     @types.Field::from_string("CENTER_FACILITY"),
     @types.Field::from_string("20260803141500"),
     @types.Field::from_string(""),
-    @types.Field::make([@types.FieldItem::make([@types.Component::SimpleComp("ORU"), @types.Component::SimpleComp("R01")])]),
+    @types.Field::make([
+      @types.FieldItem::make([
+        @types.Component::SimpleComp("ORU"),
+        @types.Component::SimpleComp("R01"),
+      ]),
+    ]),
     @types.Field::from_string("MSG_LAB_" + patient_id),
     @types.Field::from_string("P"),
     @types.Field::from_string("2.3"),
@@ -80,7 +96,11 @@ pub fn generate_oru_r01(
     @types.Field::from_string(patient_id),
   ])
 
-  let obr_svc = @types.FieldItem::make([@types.Component::SimpleComp(test_code), @types.Component::SimpleComp(test_name), @types.Component::SimpleComp("LN")])
+  let obr_svc = @types.FieldItem::make([
+    @types.Component::SimpleComp(test_code),
+    @types.Component::SimpleComp(test_name),
+    @types.Component::SimpleComp("LN"),
+  ])
   let obr_seg = @types.Segment::make("OBR", [
     @types.Field::from_string("1"),
     @types.Field::from_string("ORD_" + patient_id),
@@ -88,7 +108,10 @@ pub fn generate_oru_r01(
     @types.Field::make([obr_svc]),
   ])
 
-  let obx_svc = @types.FieldItem::make([@types.Component::SimpleComp(test_code), @types.Component::SimpleComp(test_name)])
+  let obx_svc = @types.FieldItem::make([
+    @types.Component::SimpleComp(test_code),
+    @types.Component::SimpleComp(test_name),
+  ])
   let obx_seg = @types.Segment::make("OBX", [
     @types.Field::from_string("1"),
     @types.Field::from_string("NM"),
@@ -103,6 +126,9 @@ pub fn generate_oru_r01(
     @types.Field::from_string("F"),
   ])
 
-  let msg : @types.Message = { delimiters: delims, segments: [msh_seg, pid_seg, obr_seg, obx_seg] }
+  let msg : @types.Message = {
+    delimiters: delims,
+    segments: [msh_seg, pid_seg, obr_seg, obx_seg],
+  }
   @serializer.serialize_message(msg)
 }

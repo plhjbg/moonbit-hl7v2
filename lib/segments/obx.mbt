@@ -17,9 +17,16 @@ pub(all) struct OBXSegment {
 
 ///|
 /// Extracts OBXSegment model from AST Segment.
-pub fn OBXSegment::from_segment(seg : @types.Segment) -> Result[OBXSegment, @types.HL7Error] {
+pub fn OBXSegment::from_segment(
+  seg : @types.Segment,
+) -> Result[OBXSegment, @types.HL7Error] {
   if seg.name != "OBX" {
-    return Err(@types.HL7Error::InvalidSegment("Expected OBX segment, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment(
+        "Expected OBX segment, found: " + seg.name,
+        1,
+      ),
+    )
   }
   let set_id = get_field_comp(seg, 1, 1)
   let value_type = get_field_comp(seg, 2, 1)
@@ -57,7 +64,10 @@ pub fn OBXSegment::from_segment(seg : @types.Segment) -> Result[OBXSegment, @typ
 
 ///|
 /// Converts OBXSegment model into AST Segment node.
-pub fn OBXSegment::to_segment(self : OBXSegment, delimiters : @types.Delimiters) -> @types.Segment {
+pub fn OBXSegment::to_segment(
+  self : OBXSegment,
+  delimiters : @types.Delimiters,
+) -> @types.Segment {
   let fields = Array::new()
   fields.push(@types.Field::from_string(self.set_id))
   fields.push(@types.Field::from_string(self.value_type))

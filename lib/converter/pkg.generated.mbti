@@ -1,0 +1,30 @@
+// Generated using `moon info`, DON'T EDIT IT
+package "plhjbg/moonbit-hl7v2/lib/converter"
+
+import {
+  "plhjbg/moonbit-hl7v2/lib/types",
+}
+
+// Values
+pub fn to_fhir_observation_json(@types.Message) -> String
+
+pub fn to_fhir_patient_json(@types.Message) -> String
+
+pub fn to_json_from_raw(String) -> String
+
+pub fn to_json_string(@types.Message) -> String
+
+pub fn to_markdown_summary(@types.Message) -> String
+
+pub fn to_xml_from_raw(String) -> String
+
+pub fn to_xml_string(@types.Message) -> String
+
+// Errors
+
+// Types and methods
+
+// Type aliases
+
+// Traits
+

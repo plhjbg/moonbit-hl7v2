@@ -16,7 +16,11 @@ pub(all) struct MSHSegment {
 
 ///|
 /// Helper to extract string from AST field item component safely.
-fn get_field_comp(seg : @types.Segment, field_idx_1 : Int, comp_idx_1 : Int) -> String {
+fn get_field_comp(
+  seg : @types.Segment,
+  field_idx_1 : Int,
+  comp_idx_1 : Int,
+) -> String {
   let f_idx_0 = field_idx_1 - 1
   if f_idx_0 >= seg.fields.length() {
     return ""
@@ -38,9 +42,16 @@ fn get_field_comp(seg : @types.Segment, field_idx_1 : Int, comp_idx_1 : Int) -> 
 
 ///|
 /// Extracts MSHSegment model from AST Segment.
-pub fn MSHSegment::from_segment(seg : @types.Segment) -> Result[MSHSegment, @types.HL7Error] {
+pub fn MSHSegment::from_segment(
+  seg : @types.Segment,
+) -> Result[MSHSegment, @types.HL7Error] {
   if seg.name != "MSH" {
-    return Err(@types.HL7Error::InvalidSegment("Expected MSH segment, found: " + seg.name, 1))
+    return Err(
+      @types.HL7Error::InvalidSegment(
+        "Expected MSH segment, found: " + seg.name,
+        1,
+      ),
+    )
   }
   let sending_app = get_field_comp(seg, 3, 1)
   let sending_facility = get_field_comp(seg, 4, 1)
@@ -71,7 +82,9 @@ pub fn MSHSegment::from_segment(seg : @types.Segment) -> Result[MSHSegment, @typ
 
 ///|
 /// Parses raw HL7 message and returns MSHSegment model if valid.
-pub fn parse_msh_from_raw(raw_text : String) -> Result[MSHSegment, @types.HL7Error] {
+pub fn parse_msh_from_raw(
+  raw_text : String,
+) -> Result[MSHSegment, @types.HL7Error] {
   let msg = match @parser.parse_message(raw_text) {
     Ok(m) => m
     Err(e) => return Err(e)
@@ -84,7 +97,10 @@ pub fn parse_msh_from_raw(raw_text : String) -> Result[MSHSegment, @types.HL7Err
 
 ///|
 /// Converts MSHSegment model into AST Segment node.
-pub fn MSHSegment::to_segment(self : MSHSegment, delimiters : @types.Delimiters) -> @types.Segment {
+pub fn MSHSegment::to_segment(
+  self : MSHSegment,
+  delimiters : @types.Delimiters,
+) -> @types.Segment {
   let fields = Array::new()
   // MSH-1
   fields.push(@types.Field::from_string(delimiters.field_sep.to_string()))

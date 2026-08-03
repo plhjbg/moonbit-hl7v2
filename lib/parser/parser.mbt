@@ -1,6 +1,9 @@
 ///|
 /// Parses subcomponent string into Component AST node.
-pub fn parse_component(comp_text : String, delimiters : @types.Delimiters) -> @types.Component {
+pub fn parse_component(
+  comp_text : String,
+  delimiters : @types.Delimiters,
+) -> @types.Component {
   let subcomp_sep = delimiters.subcomp_sep
   if comp_text.contains(subcomp_sep.to_string()) {
     let raw_subs = split_by_char(comp_text, subcomp_sep)
@@ -16,7 +19,10 @@ pub fn parse_component(comp_text : String, delimiters : @types.Delimiters) -> @t
 
 ///|
 /// Parses field item component string into FieldItem AST node.
-pub fn parse_field_item(item_text : String, delimiters : @types.Delimiters) -> @types.FieldItem {
+pub fn parse_field_item(
+  item_text : String,
+  delimiters : @types.Delimiters,
+) -> @types.FieldItem {
   let comp_sep = delimiters.comp_sep
   let raw_comps = split_by_char(item_text, comp_sep)
   let components = Array::new()
@@ -28,7 +34,10 @@ pub fn parse_field_item(item_text : String, delimiters : @types.Delimiters) -> @
 
 ///|
 /// Parses raw field text (including repetition ~ separator) into Field AST node.
-pub fn parse_field(field_text : String, delimiters : @types.Delimiters) -> @types.Field {
+pub fn parse_field(
+  field_text : String,
+  delimiters : @types.Delimiters,
+) -> @types.Field {
   let rep_sep = delimiters.rep_sep
   let raw_items = split_by_char(field_text, rep_sep)
   let items = Array::new()
@@ -40,9 +49,15 @@ pub fn parse_field(field_text : String, delimiters : @types.Delimiters) -> @type
 
 ///|
 /// Parses a single segment line string into Segment AST node.
-pub fn parse_segment(line : String, delimiters : @types.Delimiters, line_no : Int) -> Result[@types.Segment, @types.HL7Error] {
+pub fn parse_segment(
+  line : String,
+  delimiters : @types.Delimiters,
+  line_no : Int,
+) -> Result[@types.Segment, @types.HL7Error] {
   if line.length() < 3 {
-    return Err(@types.HL7Error::InvalidSegment("Segment line too short", line_no))
+    return Err(
+      @types.HL7Error::InvalidSegment("Segment line too short", line_no),
+    )
   }
   let seg_name = line[0:3].to_owned()
   let fields = Array::new()
@@ -70,7 +85,9 @@ pub fn parse_segment(line : String, delimiters : @types.Delimiters, line_no : In
 
 ///|
 /// Main entry: Parses raw HL7 v2 message text into Message AST structure.
-pub fn parse_message(raw_text : String) -> Result[@types.Message, @types.HL7Error] {
+pub fn parse_message(
+  raw_text : String,
+) -> Result[@types.Message, @types.HL7Error] {
   let delimiters = match extract_msh_delimiters(raw_text) {
     Ok(d) => d
     Err(e) => return Err(e)
@@ -90,7 +107,9 @@ pub fn parse_message(raw_text : String) -> Result[@types.Message, @types.HL7Erro
 
 ///|
 /// Parses multiple HL7 messages from a batch string payload separated by empty lines or MSH headers.
-pub fn parse_batch(batch_text : String) -> Array[Result[@types.Message, @types.HL7Error]] {
+pub fn parse_batch(
+  batch_text : String,
+) -> Array[Result[@types.Message, @types.HL7Error]] {
   let results = Array::new()
   let lines = split_segments(batch_text)
   let current_msg_lines = StringBuilder::new()
