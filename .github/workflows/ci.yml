@@ -1,0 +1,36 @@
+name: CI
+
+on:
+  push:
+    branches: [ main ]
+  pull_request:
+    branches: [ main ]
+
+jobs:
+  test:
+    name: Build & Test (${{ matrix.os }})
+    runs-on: ${{ matrix.os }}
+    strategy:
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup MoonBit Toolchain
+        uses: moonbitlang/setup-moonbit@v1
+
+      - name: Check Package
+        run: moon check
+
+      - name: Run Tests
+        run: moon test
+
+      - name: Check Code Formatting
+        run: moon fmt --check
+
+      - name: Generate Package Interface Info
+        run: moon info
+
+      - name: Build and Run CLI
+        run: moon run cmd/main
