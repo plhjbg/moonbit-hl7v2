@@ -87,7 +87,7 @@ println(fhir_json)
 
 ## 📊 工程质量与合规指标
 
-- **源码规模**: **16,731 行** 原生 MoonBit (`.mbt`) 代码。
+- **源码规模**: **4,146 行** 原生 MoonBit (`.mbt`) 代码 (源码 3,764 行 + 测试 382 行，不计 `_build` 缓存；加上 `.mbti` 接口导出共 **4,683 行**)。
 - **单元测试**: **28 组** 单元与场景集成测试 (全量通过 `moon test`)。
 - **工具链零警告**: MoonBit **0.10.3** 工具链，全量通过 `moon check`, `moon fmt --check`, `moon info` 零警告检测。
 - **开发者统一签名**: 提交身份严格统一为独立开发者 `plhjbg <plhjbg@users.noreply.github.com>` (GitLink 账号：`plhjbg`)。

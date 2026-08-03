@@ -13,7 +13,7 @@
 | **独立开发者** | `plhjbg` (GitLink: `plhjbg`) |
 | **开源许可证** | Apache License 2.0 |
 | **GitHub 仓库** | [https://github.com/plhjbg/moonbit-hl7v2](https://github.com/plhjbg/moonbit-hl7v2) |
-| **源码规模** | **16,731 行** 原生 MoonBit 代码 (`.mbt`) |
+| **源码规模** | **4,146 行** 原生 MoonBit 代码 (`.mbt`) (源码 3,764 行 + 测试 382 行；含 `.mbti` 共 **4,683 行**) |
 | **测试套件** | **28 组** 单元与场景集成测试 (全量通过) |
 | **工具链版本** | MoonBit 0.10.3 (零编译警告、零格式化警告) |
 
@@ -63,7 +63,7 @@ flowchart TD
 
 ## ⚡ 四、 成果与核心技术指标
 
-1. **源码规模**: **16,731 行** 原生 MoonBit (`.mbt`) 代码。
+1. **源码规模**: **4,146 行** 原生 MoonBit (`.mbt`) 代码 (源码 3,764 行 + 测试 382 行，剔除 `_build` 编译缓存；加上 `.mbti` 接口文件共 **4,683 行**)。
 2. **工具链零警告合规**: 基于 MoonBit 最新工具链 (**0.10.3**)，全量通过 `moon check`, `moon test`, `moon fmt --check`, `moon info` 检查。
 3. **测试覆盖**: 编写并全量通过 **28 组** 单元与集成测试。
 4. **Git 规范与 CI/CD**: 拥有 **14+ 次** 有效 Commit 提交，作者统一为 `plhjbg`，配置多端 GitHub Actions CI 工作流。
