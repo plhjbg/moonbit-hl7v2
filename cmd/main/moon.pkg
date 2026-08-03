@@ -1,0 +1,7 @@
+// import {
+//   "plhjbg/moonbit-hl7v2" @lib,
+// }
+
+options(
+  "is-main": true,
+)
